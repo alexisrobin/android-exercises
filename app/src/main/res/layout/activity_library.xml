@@ -23,6 +23,12 @@
     </android.support.design.widget.AppBarLayout>
 
     <Button
+        android:id="@+id/setDateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_set_date"/>
+
+    <Button
         android:id="@+id/openButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

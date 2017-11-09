@@ -1,5 +1,6 @@
 package fr.android.androidexercises;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.Toast;
 
 public class LibraryActivity extends AppCompatActivity {
+
+    private static final String BOOK = "BOOK";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +24,28 @@ public class LibraryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Button openButton = (Button) findViewById(R.id.openButton);
+        Button setDateButton = (Button) findViewById(R.id.setDateButton);
 
-        Book book = new Book("Garry Whopper", "CK Rowling");
+        final Book book = new Book("Garry Whopper", "CK Rowling");
 
         openButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LibraryActivity.this, BookActivity.class);
-                // TODO Add book to intent
+                intent.putExtra(BOOK, book);
                 startActivity(intent);
+            }
+        });
+
+        setDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(LibraryActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                        Toast.makeText(LibraryActivity.this, day + "/" + month + "/" + year, Toast.LENGTH_SHORT).show();
+                    }
+                }, 2015, 10, 26).show();
             }
         });
     }
